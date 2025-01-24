@@ -1,0 +1,9 @@
+main: me.burb.skriptspawner.SkriptSpawner
+name: skript-spawner
+version: '1.0-SNAPSHOT'
+description: "A Skript addon for advanced interaction with spawners"
+api-version: '1.21'
+author: Burbulinis
+website: https://github.com/Burbulinis/skript-spawner
+depend:
+  - Skript

@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '8.3.5'
+    id 'maven-publish'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+
+version = '1.0-SNAPSHOT'
+def latestJava = 21
+def oldestJava = 17
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    // Paper
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+
+    // Skript
+    maven { url 'https://repo.skriptlang.org/releases' }
+}
+
+dependencies {
+    // Paper
+    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+
+    // Skript
+    compileOnly(group: 'com.github.SkriptLang', name: 'Skript', version: '2.10.0') {
+        transitive = false
+    }
+
+    // bStats
+    implementation(group: 'org.bstats', name: 'bstats-bukkit', version: '3.0.2')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-source', '' + oldestJava, '-target', '' + oldestJava]
+}
+
+build {
+    dependsOn(shadowJar)
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:deprecation")
+        }
+    }
+}
+
+shadowJar {
+    archiveFileName = project.name + "-" + project.version + ".jar"
+    relocate("org.bstats", "me.burb.skriptspawner.metrics")
+    exclude('META-INF/**', 'LICENSE')
+}
+
+// Run task to build jar to another spot
+tasks.register('server', Copy) {
+    from shadowJar
+    // Change this to wherever you want your jar to build
+    into '/Minecraft Servers/lootable/plugins'
+}

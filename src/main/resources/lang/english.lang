@@ -1,0 +1,20 @@
+version: 1.0-SNAPSHOT
+
+types:
+    trialspawnerconfig: trial spawner config¦s @a
+    weightedloottable: weighted loot table¦s @a
+    spawnerentry: spawner entry, spawner entries @a
+    spawnerentryequipment: spawner entry equipment¦s @a
+    equipmentdropchance: equipment drop chance¦s @an
+    spawnrule: spawn rule¦s @a
+    spawnerweighted: spawner weighted¦s @a
+    equipmentslot: equipment slot¦s @a
+
+equipment slots:
+	helmet: helmet slot, head slot
+	chestplate: chestplate slot, chest slot
+	leggings: leggings slot, legs slot
+	boots: feet slot, boots slot
+	tool: tool slot, hand slot, main hand slot
+	off_hand: off hand slot
+	body: body slot, body armor slot
