@@ -56,10 +56,3 @@ shadowJar {
     relocate("org.bstats", "me.burb.skriptspawner.metrics")
     exclude('META-INF/**', 'LICENSE')
 }
-
-// Run task to build jar to another spot
-tasks.register('server', Copy) {
-    from shadowJar
-    // Change this to wherever you want your jar to build
-    into '/Minecraft Servers/lootable/plugins'
-}
